@@ -2,12 +2,12 @@ const sql= require("./db");
 
 const User = function(user){
     this.firstName = user.firstName || "John";
-    this.lastName = user.lastName || "Doe";
+    this.lastName = user.lastName || null;
     this.location = user.location || "Juarez";
     this.phone = user.phone;
     this.gender = user.gender;
-    this.createdAt = user.createdAt || null;
-    this.updatedAt = user.updatedAt || null;
+    this.createdAt = user.createdAt ||  Date().toString;
+    this.updatedAt = user.updatedAt || Date().toString;
     
 }
 
@@ -49,17 +49,40 @@ User.createUser = (user, result) =>{
     sql.query("INSERT INTO users SET ?", 
         user, 
         (err,res) => {
+            console.log("creating user");
 
             if (err){
+                console.log("hubo error",err);
                 result(null,err);
                 return;
             }
-
+            console.log("user created: ", {id: res.insertId});
             result(null,res);
-        })
+        });
 }
 
 User.updateUser = (userId, user, result) =>{
+    // console.log(user.firstName);
+    // if(!user.firstName){
+    //     user.firstName=sql.query("SELECT firstName from users WHERE id=?",userId);
+    // }
+
+    // if(!user.lastName){
+    //      user.lastName=sql.query("SELECT lastName from users WHERE id=?",userId, (err,res)=> {
+
+    //         if(err) {
+    //             throw err;
+    //           } else {
+    //             someVar=res;
+    //             console.log(someVar);
+    //           }
+    //      });
+ 
+          
+    //  }
+
+
+    console.log(user.lastName);
     sql.query("UPDATE users SET firstName=?, lastName=?, location=?, phone=?, gender=? WHERE id=?",
 
     [user.firstName,

@@ -1,4 +1,6 @@
+const sql = require("../models/db");
 const User = require("../models/user.model");
+
 
 exports.getAll = (req,res) =>{
 
@@ -86,6 +88,7 @@ exports.createUser = (req,res) =>{
 
 
 
+
     
     User.createUser(user, (err, data) => {
         if(err){
@@ -109,6 +112,7 @@ exports.createUser = (req,res) =>{
 
 exports.UpdateUser = (req,res) =>{
 
+    
     if (!req.body.id) {
         res.status(400).send({
            message: "Error: id is missing. Send the user's id as 'id'"
@@ -121,17 +125,17 @@ exports.UpdateUser = (req,res) =>{
         });
     }
 
-    if (!req.body.lastName) {
-        res.status(400).send({
-           message: "Error: lastName can't be empty"
-        });
-     }
+    // if (!req.body.lastName) {
+    //     res.status(400).send({
+    //        message: "Error: lastName can't be empty"
+    //     });
+    //  }
 
-    if (!req.body.gender){
-        res.status(400).send({
-            message: "gender is not specified"
-        });
-    }
+    // if (!req.body.gender){
+    //     res.status(400).send({
+    //         message: "gender is not specified"
+    //     });
+    // }
 
     console.log("About to update")
 

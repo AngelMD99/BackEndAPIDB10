@@ -1,8 +1,8 @@
 module.exports={
 
-    HOST:"147.182.255.175",
-    USER:"iacenter",
-    PASSWORD:"iacenterdbpass0",
-    DB: "iacenter_angular"
+    HOST:"192.168.100.22",
+    USER:"angeldb",
+    PASSWORD:"angel2",
+    DB: "iacenter"
 
 };
