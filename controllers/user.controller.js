@@ -52,20 +52,21 @@ exports.getSingle = (req,res) =>{
 
 };
 
-exports.createUser = (req,res) =>{
+exports.createUser = (req,res) =>{    
 
+  
     if (!req.body.firstName) {
         res.status(400).send({
            message: "Error: firstName can't be empty"
         });
      }
-
+  
      if (!req.body.lastName) {
         res.status(400).send({
            message: "Error: lastName can't be empty"
         });
      }
-
+  
      if (!req.body.gender) {
         res.status(400).send({
            message: "Error: gender can't be empty"
@@ -73,12 +74,6 @@ exports.createUser = (req,res) =>{
      }
   
 
-
-    if (!req.body.length){
-        res.status(400).send({
-            message: "you must include the data to be stored"
-        });
-    }
 
     const user = new User({
         firstName: req.body.firstName,
