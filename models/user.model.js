@@ -11,6 +11,24 @@ const User = function(user){
     
 }
 
+User.getSingle = (userId, result) =>{
+
+    sql.query("SELECT * FROM users WHERE id=?", userId , (err,res)=> {
+
+        if(err){
+            console.log("error:", err);
+            result(null,err);
+            return;
+
+        }
+        console.log("Query successful.");
+
+        result(null,res);
+
+    });
+
+}
+
 User.getAll = result => {
     
     sql.query("SELECT * FROM users", (err,res) => {
@@ -26,50 +44,32 @@ User.getAll = result => {
     });
 };
 
-User.getSingle = (userId, result) =>{
 
-        sql.query("SELECT * FROM users WHERE id=?", userId , (err,res)=> {
-
-            if(err){
-                console.log("error:", err);
-                result(null,err);
-                return;
-
-            }
-            console.log("Query successful.");
-
-            result(null,res);
-
-        });
-
-}
 
 User.createUser = (user, result) =>{
 
-    sql.query("INSERT INTO users SET ?", 
-        user, 
-        (err,res) => {
-            console.log("creating user");
+    sql.query("INSERT INTO users SET ?", user, (err,res) => {
+            console.log("creating user...");
 
             if (err){
-                console.log("hubo error",err);
+                console.log("ERROR! : ",err);
                 result(null,err);
                 return;
             }
-            console.log("user created: ", {id: res.insertId});
+            console.log("User created: ", {id: res.insertId});
             result(null,res);
         });
 }
 
-User.updateUser = (userId, user, result) =>{
-    console.log(user.firstName);
-    // if(!user.firstName){
-    //     user.firstName=sql.query("SELECT firstName from users WHERE id=?",userId);
+User.updateUser = (userId, userToUpdate, result) =>{
+    console.log(userToUpdate.firstName);
+    // if(!userToUpdate.firstName){
+    //     userToUpdate.firstName=sql.query("SELECT firstName from users WHERE id=?",userId);
     // }
     // var someVar=[];
-    // if(!user.lastName){
+    // if(!userToUpdate.lastName){
         
-    //      user.lastName=sql.query("SELECT lastName from users WHERE id=?",userId, (err,res)=> {
+    //      userToUpdate.lastName=sql.query("SELECT lastName from users WHERE id=?",userId, (err,res)=> {
 
     //         if(err) {
     //             throw err;
@@ -87,22 +87,29 @@ User.updateUser = (userId, user, result) =>{
     //  }
 
 
-    console.log(user.lastName);
+    console.log(userToUpdate.lastName);
     sql.query("UPDATE users SET firstName=?, lastName=?, location=?, phone=?, gender=? WHERE id=?",
 
-    [user.firstName,
-    user.lastName,
-    user.location,
-    user.phone,
-    user.gender,
+    [userToUpdate.firstName,
+    userToUpdate.lastName,
+    userToUpdate.location,
+    userToUpdate.phone,
+    userToUpdate.gender,
     userId], (err,res) => {
 
         if (err){
+            console.loog("ERROR! : ",err);
             result(null,err);
             return;
         }
 
-        return(null,res);
+        if(res.affectedRows==0){
+            result({kind:"User_Not_Found_In_Database"},null);
+            return;
+        }
+
+        console.log("User with id: ",userId," updated ");
+        result(null,res);
     });
 }
 

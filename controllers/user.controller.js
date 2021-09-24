@@ -1,4 +1,4 @@
-const sql = require("../models/db");
+//const sql = require("../models/db");
 const User = require("../models/user.model");
 
 
@@ -98,9 +98,11 @@ exports.createUser = (req,res) =>{
         }
         else {
             res.send({
-
-              message: "User created successfully",
-              userId: data.userId  
+               
+                message: "User created successfully.",
+                userId: data.userId         
+              
+              
             });
 
         }    
