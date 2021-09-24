@@ -62,21 +62,26 @@ User.createUser = (user, result) =>{
 }
 
 User.updateUser = (userId, user, result) =>{
-    // console.log(user.firstName);
+    console.log(user.firstName);
     // if(!user.firstName){
     //     user.firstName=sql.query("SELECT firstName from users WHERE id=?",userId);
     // }
-
+    // var someVar=[];
     // if(!user.lastName){
+        
     //      user.lastName=sql.query("SELECT lastName from users WHERE id=?",userId, (err,res)=> {
 
     //         if(err) {
     //             throw err;
     //           } else {
-    //             someVar=res;
-    //             console.log(someVar);
+    //             setValue(rows);
     //           }
     //      });
+
+    //      function setValue(value) {
+    //         someVar = value;
+    //         console.log(someVar);
+    //       }
  
           
     //  }
