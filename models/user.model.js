@@ -4,8 +4,8 @@ const User = function(user){
     this.firstName = user.firstName || "John";
     this.lastName = user.lastName || null;
     this.location = user.location || "Juarez";
-    this.phone = user.phone;
-    this.gender = user.gender;
+    this.phone = user.phone || "";
+    this.gender = user.gender || "";
     this.createdAt = user.createdAt ||  Date().toString;
     this.updatedAt = user.updatedAt || Date().toString;
     
